@@ -11,9 +11,5 @@ graph LR
     B --> C["💎 Data Enrichment"]
     C --> D["🛡️ Quality Control"]
     D --> E["📊 Executive Radar"]
-
-
-
-
-
+```
 ![Latest Announcements](./assets/news_summary.png)
