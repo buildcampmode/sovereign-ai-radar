@@ -7,11 +7,17 @@ An automated data pipeline that monitors, enriches, and visualizes global "Sover
 
 ![Sovereign AI Radar Dashboard](./assets/dashboard_overview.png)
 
-1. [Key Features](#key-features)
-2. [Process Flow](#process-flow)
-3. [System Architecture](#system-architecture)
-4.
+---
 
+## Table of Contents:
+
+- [Key Features](key-features)
+- [Process Flow](process-flow)
+- [System Architecture](system-architecture)
+- [Looker Studio Dashboard](looker-studio-deashboard)
+- [Setup Instructions](setup-instructions)
+- [Configuration](configuration)
+  
 
 ## 🚀 Key Features
 - **Intelligent Classification:** Uses `gemini-flash-latest` to distinguish between general AI news and actual sovereign/government investments.
@@ -23,8 +29,8 @@ An automated data pipeline that monitors, enriches, and visualizes global "Sover
 - **Financial Enrichment:** Automatically parses complex strings (e.g., "€50M") and converts them to **USD** using live FX rates.
 - **Geographic Mapping:** Standardizes country names and maps them to **UN M49 Regions/Sub-Regions** for macro-trend analysis.
 - **Executive Dashboarding:** Native Looker Studio integration for real-time visualization of spend and news volume.
----
-## 🔄 Process Flow
+
+## 🔄  Process Flow
 
 The E2E pipeline operates across three primary environments:
 
@@ -42,9 +48,9 @@ graph LR
     C --> D["🛡️ Quality Control"]
     D --> E["📊 Executive Radar"]
 ```
----
+
 ## 🏗️ System Architecture
----
+
 ## 📈 Looker Studio Dashboard
 The final output is a dashboard that visualizes global sovereign AI trends.
 - Analytics: KPI cards for Country Count, News Count, and Total Planned Spend.
@@ -52,7 +58,7 @@ The final output is a dashboard that visualizes global sovereign AI trends.
 - Latest Announcements: A filtered, searchable list of the latest validated news with direct source links.<br>
   ![Latest Announcements](./assets/news_summary.png)
 
----
+
 
 ## 🛠️ Setup Instructions
 
@@ -81,7 +87,7 @@ To keep the tracker updated automatically:
 1. Click the **Triggers** (alarm clock icon) on the left sidebar.
 2. Add a new trigger for the `updateDaily` function.
 3. Set it to **Time-driven** > **Day timer** > (Select your preferred time).
----
+
 ## ⚙️ Configuration
 
 The `CONFIG` object at the top of the script allows you to tune the behavior:
@@ -91,3 +97,4 @@ The `CONFIG` object at the top of the script allows you to tune the behavior:
 - `sheetUrlScanLastN`: How many recent rows to check for URL duplicates (default 5,000).
 - `day_window(14)`: Time window for fuzzy duplicate detection.
 - `headline_high(95)`: Confidence threshold for automatic duplicate removal.
+---
