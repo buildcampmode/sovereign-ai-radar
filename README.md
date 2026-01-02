@@ -40,7 +40,7 @@ A Looker Studio dashboard summarizes the latest validated signals with:
 - Geographic views: distribution by **country/region**
 - A searchable “Latest Announcements” table with direct links for fast verification
   
-  ![Latest Announcements](./assets/news_summary.png)
+![Latest Announcements](./assets/news_summary.png)
 
 ---
 
