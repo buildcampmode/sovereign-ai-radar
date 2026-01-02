@@ -114,4 +114,4 @@ Potential expansions:
 - Or comment on the LinkedIn/X post where this was shared
 
 ## Contact / ownership
-Built and maintained as part of the Sovereign AI Radar initiative by **[Ontopraxis LLC](https://www.ontopraxis.ai/)**
+Built and maintained as part of the Sovereign AI Radar initiative by **[Saurav Chowdhary](https://www.linkedin.com/in/sauravchowdhary/)**
