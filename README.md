@@ -48,14 +48,33 @@ graph LR
     C --> D["🛡️ Quality Control"]
     D --> E["📊 Executive Radar"]
 ```
-
 ## 🏗️ System Architecture
+
+### Logic Components
+- LockService: Prevents concurrent script executions from corrupting data.
+- XmlService: Parses complex XML feeds with namespace awareness.
+- SHA-256 Digest: Converts URLs/Titles into unique IDs for memory-efficient tracking.
+- RapidFuzz (Python): Compares headline and summary similarity using token_set_ratio to cluster reworded news articles.
+- Python FX API (Frankfurter): Converts global currency strings (e.g., "€50M") into a normalized USD baseline for KPI tracking.
+- Country Converter (Coco): Standardizes messy country names into canonical formats for accurate mapping and UN M49 regional grouping.
+
+### 📊 Data Schema
+The system maintains a standardized output format in the `daily_enriched` worksheet to ensure data integrity across the pipeline:
+
+| Column | Description | Business Logic |
+| :--- | :--- | :--- |
+| **news_id** | 16-char unique ID | Generated from date, headline, and buyer to ensure stable tracking. |
+| **amount_usd** | Numeric | Normalized investment value for global KPI calculation using FX APIs. |
+| **country** | String | Standardized ISO-compatible name (e.g., "United States" instead of "USA"). |
+| **Region** | String | High-level geography (UN M49 standard) for dashboard filtering. |
+| **dedupe_action** | String | Set to "KEEP" or "REMOVE" based on RapidFuzz similarity scoring. |
 
 ## 📈 Looker Studio Dashboard
 The final output is a dashboard that visualizes global sovereign AI trends.
 - Analytics: KPI cards for Country Count, News Count, and Total Planned Spend.
 - Geographic Distribution: Heatmaps and treemaps visualizing news volume by country.
 - Latest Announcements: A filtered, searchable list of the latest validated news with direct source links.<br>
+
   ![Latest Announcements](./assets/news_summary.png)
 
 ## 🛠️ Setup Instructions
