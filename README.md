@@ -89,7 +89,7 @@ The system produces two main datasets:
 
 ---
 
-## Setup (for operators)
+## Setup
 If you want to run this pipeline privately:
 1. **Google Sheet + script**: initialize the tracker and schedule daily pulls  
 2. **API key**: configure the AI extraction key via script properties  
@@ -102,7 +102,7 @@ If you want to run this pipeline privately:
 
 ---
 
-## Roadmap (optional / future)
+## Roadmap
 Potential expansions:
 - **Vendor & partner graph** (repeat players, ecosystems, alliances)
 - **Program maturity scoring** (intent → committed → contracted → delivered → scaled)
