@@ -19,7 +19,7 @@ An automated data pipeline that monitors, enriches, and visualizes global "Sover
 - [Configuration](#configuration)
   
 
-## 🚀 Key Features
+## Key Features
 - **Intelligent Classification:** Uses `gemini-flash-latest` to distinguish between general AI news and actual sovereign/government investments.
 - **Multi-Stage Deduplication:** * **Layer 1 (Apps Script):** Persistent SHA-256 Hashes for exact matches.
     - **Layer 2 (Python):** `RapidFuzz` fuzzy matching for "newsy duplicates" across different outlets within a 14-day window.
