@@ -1,7 +1,7 @@
 # Sovereign AI Radar
-A decision-ready view of **where Sovereign AI money is flowing** — who is funding, buying, building, and partnering — powered by a continuously updated global news pipeline.
+A unified view of **where Sovereign AI investments are happening** — who is funding, buying, building, and partnering — powered by a continuously updated global news pipeline.
 
-Sovereign AI Radar turns noisy announcements into a **structured, comparable, and searchable** stream of investment signals. It helps leaders track momentum by **country, region, vendor ecosystem, and spend** — and spot emerging patterns early.
+Sovereign AI Radar turns announcements into a **structured, comparable, and searchable** stream of investment signals. It helps leaders track momentum by **country, region, vendor ecosystem, and spend** — and spot emerging patterns early.
 
 ![Sovereign AI Radar Dashboard](./assets/dashboard_overview.png)
 
@@ -47,7 +47,7 @@ A Looker Studio dashboard summarizes the latest validated signals with:
 ## How it works (high level)
 Sovereign AI Radar operates as a simple end-to-end loop:
 1. **Monitor**: scans Google Alerts (Atom) and Google News (RSS) feeds for relevant coverage
-2. **Extract**: uses **Google Gemini** to convert articles into structured “deal/program” fields
+2. **Extract**: uses **Google Gemini** to convert articles into structured “news/program” fields
 3. **Standardize**: uses a **Python (Pandas)** enrichment layer to normalize:
    - currencies → **USD**
    - country names → canonical formats
