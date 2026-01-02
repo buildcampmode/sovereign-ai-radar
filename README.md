@@ -85,7 +85,7 @@ The system produces two main datasets:
 - **Python + Pandas** for enrichment and quality control (currency, geography, normalization)
 - **RapidFuzz** for fuzzy duplicate detection across reworded reporting
 - **Looker Studio** for executive visualization
-- **ChatGPT** for AI-assisted coding
+- **ChatGPT (`5.2 model`)** for AI-assisted coding
 
 ---
 
