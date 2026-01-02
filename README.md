@@ -30,7 +30,7 @@ An automated data pipeline that monitors, enriches, and visualizes global "Sover
 - **Geographic Mapping:** Standardizes country names and maps them to **UN M49 Regions/Sub-Regions** for macro-trend analysis.
 - **Executive Dashboarding:** Native Looker Studio integration for real-time visualization of spend and news volume.
 
-## 🔄  Process Flow
+## 🔄 Process Flow
 
 The E2E pipeline operates across three primary environments:
 
