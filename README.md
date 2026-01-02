@@ -1,116 +1,107 @@
-# sovereign-ai-radar
-*Analyzing global news around Sovereign AI starting 2025*
+# Sovereign AI Radar
+A decision-ready view of **where Sovereign AI money is flowing** — who is funding, buying, building, and partnering — powered by a continuously updated global news pipeline.
 
-```👨🏼‍💻 Developed using Vibe coding```
-
-An automated data pipeline that monitors, enriches, and visualizes global "Sovereign AI" investments. This system utilizes Google Gemini AI for deal extraction and a Python/Pandas enrichment layer for financial and geographic standardization.
+Sovereign AI Radar turns noisy announcements into a **structured, comparable, and searchable** stream of investment signals. It helps leaders track momentum by **country, region, vendor ecosystem, and spend** — and spot emerging patterns early.
 
 ![Sovereign AI Radar Dashboard](./assets/dashboard_overview.png)
 
 ---
 
-## Table of Contents:
+## Why it matters
+Sovereign AI is moving from ambition to execution: national programs, cloud capacity buildouts, strategic procurements, and public-private partnerships are accelerating globally. But signals are fragmented across outlets and formats.
 
-- [Key Features](#-key-features)
-- [Process Flow](#-process-flow)
-- [System Architecture](#%EF%B8%8F-system-architecture)
-- [Looker Studio Dashboard](#-looker-studio-dashboard)
-- [Setup Instructions](#%EF%B8%8F-setup-instructions)
-- [Configuration](#%EF%B8%8F-configuration)
+Sovereign AI Radar provides:
+- **Signal over noise**: filters generic AI chatter and isolates sovereign/government-backed investments.
+- **Comparable data**: normalizes currencies and geography so trends can be measured consistently.
+- **Confidence in insights**: reduces duplicates and “echo coverage” to avoid inflated narratives.
+- **Executive visibility**: a live dashboard built for quick scanning and deeper drill-down.
+
+---
+
+## What you get
+### 1) A structured stream of Sovereign AI investment signals
+Each validated item is standardized into a consistent record (example fields):
+- **Country / Region** (aligned to UN M49)
+- **Buyer / Program** (where available)
+- **Vendors / Partners** (where available)
+- **Investment value (USD)** when disclosed or inferable
+- **Category** of activity (e.g., infrastructure, model dev, applications)
+- **Source link + timestamp** for traceability
+
+### 2) Trend visibility that supports decisions
+The dashboard and dataset make it easy to answer questions like:
+- Where is **spend** concentrating—by region, country, and category?
+- Which vendors are repeatedly present in sovereign deals?
+- What’s new this week — and what’s re-reported news?
+
+### 3) A live executive dashboard
+A Looker Studio dashboard summarizes the latest validated signals with:
+- KPI cards: **total spend (USD), news volume, countries active**
+- Geographic views: distribution by **country/region**
+- A searchable “Latest Announcements” table with direct links for fast verification
   
-
-## 🚀 Key Features
-- **Intelligent Classification:** Uses `gemini-flash-latest` to distinguish between general AI news and actual sovereign/government investments.
-- **Multi-Stage Deduplication:** * **Layer 1 (Apps Script):** Persistent SHA-256 Hashes for exact matches.
-    - **Layer 2 (Python):** `RapidFuzz` fuzzy matching for "newsy duplicates" across different outlets within a 14-day window.
-- **Dual Feed Support:** Native handling for both **RSS** (Google News) and **Atom** (Google Alerts) XML namespaces.
-- **Batch Processing:** Optimizes performance and script runtime by batch-writing rows to the spreadsheet.
-- **Reliability:** Implements exponential backoff and retries for Gemini API calls to handle transient network issues.
-- **Financial Enrichment:** Automatically parses complex strings (e.g., "€50M") and converts them to **USD** using live FX rates.
-- **Geographic Mapping:** Standardizes country names and maps them to **UN M49 Regions/Sub-Regions** for macro-trend analysis.
-- **Executive Dashboarding:** Native Looker Studio integration for real-time visualization of spend and news volume.
-
-## 🔄 Process Flow
-
-The E2E pipeline operates across three primary environments:
-
-1. **Ingestion (Apps Script):** Fetches XML from Google Alerts, normalizes URLs, and uses Gemini to extract raw structured data into the `daily_updates` tab.
-2. **Enrichment (Python/Colab):** * Cleans headlines and canonicalizes URLs.
-    - Enriches rows with standardized countries, currencies, and USD values.
-    - Joins against regional mapping files to add UN geographic metadata.
-3. **Deduplication & Quality Control (Python):** Clustered deduplication logic ranks duplicate entries by "data density" and marks a single "KEEP" candidate per group.
-4. **Visualization (Looker Studio):** Consumes the `daily_enriched` tab, filtering for high-confidence records to populate strategic charts.
-
-```mermaid
-graph LR
-    A["🌐 Data Sourcing"] --> B["🤖 AI Analysis"]
-    B --> C["💎 Data Enrichment"]
-    C --> D["🛡️ Quality Control"]
-    D --> E["📊 Executive Radar"]
-```
-## 🏗️ System Architecture
-
-### Logic Components
-- LockService: Prevents concurrent script executions from corrupting data.
-- XmlService: Parses complex XML feeds with namespace awareness.
-- SHA-256 Digest: Converts URLs/Titles into unique IDs for memory-efficient tracking.
-- RapidFuzz (Python): Compares headline and summary similarity using token_set_ratio to cluster reworded news articles.
-- Python FX API (Frankfurter): Converts global currency strings (e.g., "€50M") into a normalized USD baseline for KPI tracking.
-- Country Converter (Coco): Standardizes messy country names into canonical formats for accurate mapping and UN M49 regional grouping.
-
-### 📊 Data Schema
-The system maintains a standardized output format in the `daily_enriched` worksheet to ensure data integrity across the pipeline:
-
-| Column | Description | Business Logic |
-| :--- | :--- | :--- |
-| **news_id** | 16-char unique ID | Generated from date, headline, and buyer to ensure stable tracking. |
-| **amount_usd** | Numeric | Normalized investment value for global KPI calculation using FX APIs. |
-| **country** | String | Standardized ISO-compatible name (e.g., "United States" instead of "USA"). |
-| **Region** | String | High-level geography (UN M49 standard) for dashboard filtering. |
-| **dedupe_action** | String | Set to "KEEP" or "REMOVE" based on RapidFuzz similarity scoring. |
-
-## 📈 Looker Studio Dashboard
-The final output is a dashboard that visualizes global sovereign AI trends.
-- Analytics: KPI cards for Country Count, News Count, and Total Planned Spend.
-- Geographic Distribution: Heatmaps and treemaps visualizing news volume by country.
-- Latest Announcements: A filtered, searchable list of the latest validated news with direct source links.<br>
-
   ![Latest Announcements](./assets/news_summary.png)
 
-## 🛠️ Setup Instructions
-
-### 1. Spreadsheet Preparation
-
-Open your Google Sheet, go to **Extensions > Apps Script**, and paste the code. Run the `setupSheet()` function to initialize the headers.
-
-### 2. API Key Configuration
-
-This script requires a Gemini API Key.
-
-1. Go to **Project Settings** (gear icon) in the Apps Script editor.
-2. Under **Script Properties**, add a new property:
-    - **Property:** `GEMINI_API_KEY`
-    - **Value:** `[Your actual API Key from Google AI Studio]`
-
-### 3. Python Enrichment
-1. Install requirements: pip install gspread gspread_dataframe pandas pycountry country_converter rapidfuzz.
-2. Run the enrichment script to process raw updates into daily_enriched.
-3. Note: Ensure the country mapping tab (UN M49) exists in your sheet for regional mapping.
-
-### 4. Automation (Triggers)
-
-To keep the tracker updated automatically:
-
-1. Click the **Triggers** (alarm clock icon) on the left sidebar.
-2. Add a new trigger for the `updateDaily` function.
-3. Set it to **Time-driven** > **Day timer** > (Select your preferred time).
-
-## ⚙️ Configuration
-The `CONFIG` object at the top of the script allows you to tune the behavior:
-
-- `dailyMaxItems`: Limits the number of articles processed per day to manage API costs.
-- `seenStoreLimit`: Controls how many article hashes are remembered (default 12,000).
-- `sheetUrlScanLastN`: How many recent rows to check for URL duplicates (default 5,000).
-- `day_window(14)`: Time window for fuzzy duplicate detection.
-- `headline_high(95)`: Confidence threshold for automatic duplicate removal.
 ---
+
+## How it works (high level)
+Sovereign AI Radar operates as a simple end-to-end loop:
+1. **Monitor**: scans Google Alerts (Atom) and Google News (RSS) feeds for relevant coverage
+2. **Extract**: uses **Google Gemini** to convert articles into structured “deal/program” fields
+3. **Standardize**: uses a **Python (Pandas)** enrichment layer to normalize:
+   - currencies → **USD**
+   - country names → canonical formats
+   - country → **UN M49 region/sub-region**
+4. **De-duplicate**: reduces repeated coverage across outlets so metrics reflect unique events
+5. **Visualize**: updates Looker Studio for real-time exploration
+
+---
+
+## Data quality principles
+- **Traceable**: every record links back to a primary source.
+- **Comparable**: monetary values are normalized to USD; geography is standardized.
+- **Conservative**: duplicates are removed to prevent inflated counts and misleading narratives.
+- **Repeatable**: the process runs on a schedule with consistent rules and audit-friendly outputs.
+
+---
+
+## Outputs
+The system produces two main datasets:
+- **Daily Updates**: newly detected items and extracted fields (raw structured signals)
+- **Daily Enriched**: cleaned + standardized + de-duplicated records used for analysis and dashboarding
+
+---
+
+## Under the hood (technology, in brief)
+- **Google Apps Script** for ingestion + daily automation
+- **Google Gemini (`gemini-flash-latest`)** for classification and structured extraction
+- **Python + Pandas** for enrichment and quality control (currency, geography, normalization)
+- **RapidFuzz** for fuzzy duplicate detection across reworded reporting
+- **Looker Studio** for executive visualization
+
+---
+
+## Setup (for operators)
+If you want to run this pipeline privately:
+1. **Google Sheet + script**: initialize the tracker and schedule daily pulls  
+2. **API key**: configure the AI extraction key via script properties  
+3. **Enrichment step**: run the enrichment script/notebook to standardize data  
+4. **Dashboard**: connect Looker Studio to the enriched dataset
+
+> Notes:
+> - The system is designed to control cost via daily item limits.
+> - Currency conversions depend on FX availability and the chosen conversion date policy.
+
+---
+
+## Roadmap (optional / future)
+Potential expansions:
+- **Vendor & partner graph** (repeat players, ecosystems, alliances)
+- **Program maturity scoring** (intent → committed → contracted → delivered → scaled)
+- **Asset mapping** (compute clusters, data centers, sovereign clouds, model hubs)
+- **Alerting** (notify when new high-value signals appear in key regions)
+
+---
+
+## Contact / ownership
+Built and maintained as part of the Sovereign AI Radar initiative by **[Ontopraxis LLC](https://www.ontopraxis.ai/)**
