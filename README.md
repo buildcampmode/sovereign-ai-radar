@@ -16,7 +16,7 @@ An automated data pipeline that monitors, enriches, and visualizes global "Sover
 - [System Architecture](#-system-architecture)
 - [Looker Studio Dashboard](#-looker-studio-dashboard)
 - [Setup Instructions](#-setup-instructions)
-- [Configuration](#-configuration)
+- [Configuration](#-%EF%B8%8F-configuration)
   
 
 ## 🚀 Key Features
@@ -58,8 +58,6 @@ The final output is a dashboard that visualizes global sovereign AI trends.
 - Latest Announcements: A filtered, searchable list of the latest validated news with direct source links.<br>
   ![Latest Announcements](./assets/news_summary.png)
 
-
-
 ## 🛠️ Setup Instructions
 
 ### 1. Spreadsheet Preparation
@@ -89,7 +87,6 @@ To keep the tracker updated automatically:
 3. Set it to **Time-driven** > **Day timer** > (Select your preferred time).
 
 ## ⚙️ Configuration
-
 The `CONFIG` object at the top of the script allows you to tune the behavior:
 
 - `dailyMaxItems`: Limits the number of articles processed per day to manage API costs.
