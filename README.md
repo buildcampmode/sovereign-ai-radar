@@ -109,6 +109,9 @@ Potential expansions:
 - **Alerting** (notify when new high-value signals appear in key regions)
 
 ---
+## Feedback
+- Open an Issue: https://github.com/buildcampmode/sovereign-ai-radar/issues
+- Or comment on the LinkedIn/X post where this was shared
 
 ## Contact / ownership
 Built and maintained as part of the Sovereign AI Radar initiative by **[Ontopraxis LLC](https://www.ontopraxis.ai/)**
