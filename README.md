@@ -11,7 +11,7 @@ An automated data pipeline that monitors, enriches, and visualizes global "Sover
 
 ## Table of Contents:
 
-- [Key Features](#key-features)
+- [Key Features](#-key-features)
 - [Process Flow](#process-flow)
 - [System Architecture](#system-architecture)
 - [Looker Studio Dashboard](#looker-studio-deashboard)
