@@ -55,6 +55,13 @@ Sovereign AI Radar operates as a simple end-to-end loop:
 4. **De-duplicate**: reduces repeated coverage across outlets so metrics reflect unique events
 5. **Visualize**: updates Looker Studio for real-time exploration
 
+```mermaid
+graph LR
+    A["🌐 Data Sourcing"] --> B["🤖 AI Analysis"]
+    B --> C["💎 Data Enrichment"]
+    C --> D["🛡️ Quality Control"]
+    D --> E["📊 Executive Radar"]
+```
 ---
 
 ## Data quality principles
